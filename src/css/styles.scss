@@ -1,3 +1,7 @@
+// Limit measurement types to a few
+// Use normalize/reset file to reduce default behaviors
+// Change all of this
+
 * {
   margin: 0;
 }
@@ -30,7 +34,7 @@ h1 {
 }
 
 .body-sidebar-sidebarContainer {
-  background-color: #9A9DAB;
+  background-color: #9a9dab;
   border: 1px solid black;
   display: flex;
   flex-direction: column;
@@ -47,7 +51,7 @@ h1 {
   font-family: sans-serif;
   font-weight: bold;
   font-size: 1.2em;
-  margin: .5em .5em .5em .5em;
+  margin: 0.5em 0.5em 0.5em 0.5em;
   width: inherit;
 }
 
@@ -91,19 +95,19 @@ h1 {
 .main-column-hydration {
   display: flex;
   flex-direction: row;
-  height: 25%
+  height: 25%;
 }
 
 .main-column-activity {
   display: flex;
   flex-direction: row;
-  height: 50%
+  height: 50%;
 }
 
 .main-column-sleep {
   display: flex;
   flex-direction: row;
-  height: 35%
+  height: 35%;
 }
 
 .infoContainer-cardContainer-card-horizontal {
@@ -137,10 +141,10 @@ h1 {
 
 .card-today-hydration {
   text-align: center;
-  background-color: #5BC8AC;
+  background-color: #5bc8ac;
   height: auto;
   font-size: 1.5em;
-  margin: .5em;
+  margin: 0.5em;
   font-family: sans-serif;
   display: flex;
   flex-direction: column;
@@ -150,10 +154,10 @@ h1 {
 
 .card-today-sleep {
   text-align: center;
-  background-color: #EC96A4;
+  background-color: #ec96a4;
   height: auto;
   font-size: 1.5em;
-  margin: .5em;
+  margin: 0.5em;
   font-family: sans-serif;
   display: flex;
   flex-direction: column;
@@ -163,10 +167,10 @@ h1 {
 
 .card-today-activity {
   text-align: center;
-  background-color: #DFE166;
+  background-color: #dfe166;
   height: auto;
   font-size: 1.5em;
-  margin: .3em;
+  margin: 0.3em;
   font-family: sans-serif;
   display: flex;
   flex-direction: column;
@@ -176,9 +180,9 @@ h1 {
 
 .card-history-hydration {
   text-align: center;
-  background-color: #5BC8AC;
+  background-color: #5bc8ac;
   font-size: 1em;
-  margin: .5em;
+  margin: 0.5em;
   font-family: sans-serif;
   display: flex;
   flex-direction: column;
@@ -188,9 +192,9 @@ h1 {
 
 .card-history-sleep {
   text-align: center;
-  background-color: #EC96A4;
+  background-color: #ec96a4;
   font-size: 1em;
-  margin: .5em;
+  margin: 0.5em;
   font-family: sans-serif;
   display: flex;
   flex-direction: column;
@@ -200,9 +204,9 @@ h1 {
 
 .card-history-activity {
   text-align: center;
-  background-color: #DFE166;
+  background-color: #dfe166;
   font-size: 1em;
-  margin: .5em;
+  margin: 0.5em;
   font-family: sans-serif;
   display: flex;
   flex-direction: column;
@@ -223,7 +227,7 @@ h1 {
   text-align: center;
   font-size: 1em;
   font-weight: bolder;
-  margin: .5em;
+  margin: 0.5em;
   color: black;
 }
 
@@ -231,7 +235,7 @@ h1 {
   text-align: center;
   font-size: 1em;
   font-weight: bolder;
-  margin: .5em;
+  margin: 0.5em;
   color: black;
 }
 
@@ -244,7 +248,7 @@ h1 {
 }
 
 .historical-list-listItem {
-  padding: .3em;
+  padding: 0.3em;
   font-weight: bold;
   font-family: sans-serif;
 }
