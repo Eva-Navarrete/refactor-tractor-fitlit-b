@@ -60,11 +60,11 @@ function startApp() {
   //this function is called at end of scripts file
   let userList = []; // a list of user instances
   instantiateUsers(userList); // instanciation of users
-  let userRepo = new UserRepo(userList);
+  let userRepo = new UserRepo(userList); // All instantiations should live together
   let hydrationRepo = new Hydration(hydrationData);
   let sleepRepo = new Sleep(sleepData);
   let activityRepo = new Activity(activityData);
-  var userNowId = pickUser();
+  let userNowId = pickUser(); // choices random user
   let userNow = getUserById(userNowId, userRepo);
   let today = makeToday(userRepo, userNowId, hydrationData);
   let randomHistory = makeRandomDate(userRepo, userNowId, hydrationData);
