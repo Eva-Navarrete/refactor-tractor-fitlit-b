@@ -4,11 +4,8 @@ import './css/styles.scss';
 import './images/person walking on path.jpg';
 import './images/The Rock.jpg';
 
-/////////// These need to be replaced by APIcalls
-import userData from './data/users';
-import hydrationData from './data/hydration';
-import sleepData from './data/sleep';
-import activityData from './data/activity';
+import { promise } from '../src/apiCalls';
+
 
 import User from './User';
 import Activity from './Activity';
@@ -58,18 +55,18 @@ var streakListMinutes = document.getElementById('streakListMinutes');
 //This function instantiates all the repo classes and DOM manipulation
 function startApp() {
   //this function is called at end of scripts file
-  let userList = []; // a list of user instances
-  instantiateUsers(userList); // instanciation of users
-  let userRepo = new UserRepo(userList); // All instantiations should live together
-  let hydrationRepo = new Hydration(hydrationData);
-  let sleepRepo = new Sleep(sleepData);
-  let activityRepo = new Activity(activityData);
-  let currentUserID = randomizeId(); // choices random user
+  promise.then(data => {
+  // let userList = [];
+   let userList = instantiateUsers(data[0].userData);
+   // console.log(userList);
+  let userRepo = new UserRepo(userList);
+  let hydrationRepo = new Hydration(data[3].hydrationData);
+  let sleepRepo = new Sleep(data[1].sleepData);
+  let activityRepo = new Activity(data[2].activityData);
+  let currentUserID = randomizeId();
   let currentUser = getUserById(currentUserID, userRepo); // user object
-
-  let today = makeToday(userRepo, currentUserID, hydrationData); // Here they are only finding the today based on hydrationData!
-  let randomHistory = makeRandomDate(userRepo, currentUserID, hydrationData);
-
+  let today = makeToday(userRepo, currentUserID, hydrationRepo.hydrationData);
+  let randomHistory = makeRandomDate(userRepo, currentUserID, hydrationRepo.hydrationData);
   historicalWeek.forEach((instance) =>
     instance.insertAdjacentHTML('afterBegin', `Week of ${randomHistory}`)
   );
@@ -94,15 +91,16 @@ function startApp() {
     randomHistory,
     currentUser
   );
+})
 }
 
 // instantiates an array of user class objects
-function instantiateUsers(array) { // REFACTOR!!
-  userData.forEach(function (dataItem) {
+function instantiateUsers(array) {
+  const users = array.map(dataItem => {
     let user = new User(dataItem);
-    array.push(user);
-
+    return user;
   });
+  return users;
 }
 
 // Function that picks user to display
@@ -115,18 +113,18 @@ function getUserById(id, listRepo) {
   return listRepo.getDataFromID(id);
 }
 
-const renderPage() => {
-
-
-
-
-
-
-
-
-
-
-}
+// const renderPage() => {
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+// }
 
 //DOM Manipulation Functions
 function renderSidebar(user, userStorage) {
@@ -159,9 +157,10 @@ function makeWinnerID(activityInfo, user, dateString, userStorage) { // NOT DOM 
   return activityInfo.getWinnerId(user, dateString, userStorage);
 }
 
-function makeToday(userStorage, id, dataSet) { // NOT DOM
-  let sortedArray = userStorage.makeSortedUserArray(id, dataSet);
+function makeToday(userStorage, id, dataSet) {
+  var sortedArray = userStorage.makeSortedUserArray(id, dataSet);
   return sortedArray[0].date;
+
 }
 
 function makeRandomDate(userStorage, id, dataSet) { // NOT DOM
