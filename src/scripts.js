@@ -6,12 +6,6 @@ import './images/The Rock.jpg';
 
 import { promise } from '../src/apiCalls';
 
-console.log(promise)
-/////////// These need to be replaced by APIcalls
-import userData from './data/users';
-import hydrationData from './data/hydration';
-import sleepData from './data/sleep';
-import activityData from './data/activity';
 
 import User from './User';
 import Activity from './Activity';
@@ -21,7 +15,6 @@ import UserRepo from './User-repo';
 ////////////
 
 // Which ones are actually necessary?
-// Move necessary to DOMupdates file
 var sidebarName = document.getElementById('sidebarName');
 var stepGoalCard = document.getElementById('stepGoalCard');
 var headerText = document.getElementById('headerText');
@@ -70,33 +63,33 @@ function startApp() {
   let hydrationRepo = new Hydration(data[3].hydrationData);
   let sleepRepo = new Sleep(data[1].sleepData);
   let activityRepo = new Activity(data[2].activityData);
-  var userNowId = pickUser();
-  let userNow = getUserById(userNowId, userRepo);
-  let today = makeToday(userRepo, userNowId, hydrationData);
-  let randomHistory = makeRandomDate(userRepo, userNowId, hydrationData);
+  let currentUserID = randomizeId();
+  let currentUser = getUserById(currentUserID, userRepo); // user object
+  let today = makeToday(userRepo, currentUserID, hydrationRepo.hydrationData);
+  let randomHistory = makeRandomDate(userRepo, currentUserID, hydrationRepo.hydrationData);
   historicalWeek.forEach((instance) =>
     instance.insertAdjacentHTML('afterBegin', `Week of ${randomHistory}`)
   );
-  addInfoToSidebar(userNow, userRepo);
-  addHydrationInfo(userNowId, hydrationRepo, today, userRepo, randomHistory);
-  addSleepInfo(userNowId, sleepRepo, today, userRepo, randomHistory);
-  let winnerNow = makeWinnerID(activityRepo, userNow, today, userRepo);
-  addActivityInfo(
-    userNowId,
+  renderSidebar(currentUser, userRepo);
+  addHydrationInfo(currentUserID, hydrationRepo, today, userRepo, randomHistory);
+  renderSleep(currentUserID, sleepRepo, today, userRepo, randomHistory);
+  let winnerNow = makeWinnerID(activityRepo, currentUser, today, userRepo);
+  renderActivity(
+    currentUserID,
     activityRepo,
     today,
     userRepo,
     randomHistory,
-    userNow,
+    currentUser,
     winnerNow
   );
-  addFriendGameInfo(
-    userNowId,
+  renderFriendGame(
+    currentUserID,
     activityRepo,
     userRepo,
     today,
     randomHistory,
-    userNow
+    currentUser
   );
 })
 }
@@ -111,7 +104,7 @@ function instantiateUsers(array) {
 }
 
 // Function that picks user to display
-function pickUser() {
+function randomizeId() {
   return Math.floor(Math.random() * 50);
 }
 
@@ -120,8 +113,21 @@ function getUserById(id, listRepo) {
   return listRepo.getDataFromID(id);
 }
 
+// const renderPage() => {
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+// }
+
 //DOM Manipulation Functions
-function addInfoToSidebar(user, userStorage) {
+function renderSidebar(user, userStorage) {
   sidebarName.innerText = user.name;
   headerText.innerText = `${user.getFirstName()}'s Activity Tracker`;
   stepGoalCard.innerText = `Your daily step goal is ${user.dailyStepGoal}.`;
@@ -131,12 +137,15 @@ function addInfoToSidebar(user, userStorage) {
   userStridelength.innerText = `Your stridelength is ${user.strideLength} meters.`;
   friendList.insertAdjacentHTML(
     'afterBegin',
-    makeFriendHTML(user, userStorage)
+    renderFriendList(user, userStorage)
   );
 }
 
-function makeFriendHTML(user, userStorage) {
-  return user
+
+
+
+function renderFriendList(user, userStorage) { // this is rendered inside of renderSidebar
+  return user // return is happening prior to the function? No... Return is holding the function
     .getFriendsNames(userStorage)
     .map(
       (friendName) => `<li class='historical-list-listItem'>${friendName}</li>`
@@ -144,23 +153,22 @@ function makeFriendHTML(user, userStorage) {
     .join('');
 }
 
-function makeWinnerID(activityInfo, user, dateString, userStorage) {
+function makeWinnerID(activityInfo, user, dateString, userStorage) { // NOT DOM MANI
   return activityInfo.getWinnerId(user, dateString, userStorage);
 }
 
 function makeToday(userStorage, id, dataSet) {
   var sortedArray = userStorage.makeSortedUserArray(id, dataSet);
-  console.log('this sorted Array',sortedArray);
   return sortedArray[0].date;
 
 }
 
-function makeRandomDate(userStorage, id, dataSet) {
-  var sortedArray = userStorage.makeSortedUserArray(id, dataSet);
+function makeRandomDate(userStorage, id, dataSet) { // NOT DOM
+  var sortedArray = userStorage.makeSortedUserArray(id, dataSet); // using a method on the userStorage?
   return sortedArray[Math.floor(Math.random() * sortedArray.length + 1)].date;
 }
 
-function addHydrationInfo(
+function addHydrationInfo( // Dom manipulation
   id,
   hydrationInfo,
   dateString,
@@ -200,7 +208,7 @@ function addHydrationInfo(
   );
 }
 
-function makeHydrationHTML(id, hydrationInfo, userStorage, method) {
+function makeHydrationHTML(id, hydrationInfo, userStorage, method) { // dom monipulation
   return method
     .map(
       (drinkData) =>
@@ -209,7 +217,7 @@ function makeHydrationHTML(id, hydrationInfo, userStorage, method) {
     .join('');
 }
 
-function addSleepInfo(id, sleepInfo, dateString, userStorage, laterDateString) {
+function renderSleep(id, sleepInfo, dateString, userStorage, laterDateString) { //
   sleepToday.insertAdjacentHTML(
     'afterBegin',
     `<p>You slept</p> <p><span class="number">${sleepInfo.calculateDailySleep(
@@ -268,7 +276,7 @@ function makeSleepQualityHTML(id, sleepInfo, userStorage, method) {
     .join('');
 }
 
-function addActivityInfo(
+function renderActivity(
   id,
   activityInfo,
   dateString,
@@ -353,7 +361,7 @@ function addActivityInfo(
   );
   userMinutesThisWeek.insertAdjacentHTML(
     'afterBegin',
-    makeMinutesHTML(
+    renderMinutes(
       id,
       activityInfo,
       userStorage,
@@ -393,7 +401,7 @@ function makeStairsHTML(id, activityInfo, userStorage, method) {
     .join('');
 }
 
-function makeMinutesHTML(id, activityInfo, userStorage, method) {
+function renderMinutes(id, activityInfo, userStorage, method) { // invoked inside of renderActivity function
   return method
     .map(
       (data) => `<li class="historical-list-listItem">On ${data} minutes</li>`
@@ -401,7 +409,7 @@ function makeMinutesHTML(id, activityInfo, userStorage, method) {
     .join('');
 }
 
-function addFriendGameInfo(
+function renderFriendGame( // Dom Manipulation
   id,
   activityInfo,
   userStorage,
@@ -473,3 +481,6 @@ function makeStepStreakHTML(id, activityInfo, userStorage, method) {
 }
 
 startApp();
+/// Dom Updates Starts Here
+// MEDIA QUERIES Here
+// Move necessary to DOMupdates file
