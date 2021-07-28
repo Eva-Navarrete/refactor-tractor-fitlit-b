@@ -18,7 +18,6 @@ import UserRepo from './User-repo';
 ////////////
 
 // Which ones are actually necessary?
-// Move necessary to DOMupdates file
 var sidebarName = document.getElementById('sidebarName');
 var stepGoalCard = document.getElementById('stepGoalCard');
 var headerText = document.getElementById('headerText');
@@ -59,8 +58,8 @@ var streakListMinutes = document.getElementById('streakListMinutes');
 //This function instantiates all the repo classes and DOM manipulation
 function startApp() {
   //this function is called at end of scripts file
-  let userList = [];
-  makeUsers(userList);
+  let userList = []; // a list of user instances
+  instantiateUsers(userList); // instanciation of users
   let userRepo = new UserRepo(userList);
   let hydrationRepo = new Hydration(hydrationData);
   let sleepRepo = new Sleep(sleepData);
@@ -69,6 +68,7 @@ function startApp() {
   let userNow = getUserById(userNowId, userRepo);
   let today = makeToday(userRepo, userNowId, hydrationData);
   let randomHistory = makeRandomDate(userRepo, userNowId, hydrationData);
+
   historicalWeek.forEach((instance) =>
     instance.insertAdjacentHTML('afterBegin', `Week of ${randomHistory}`)
   );
@@ -96,10 +96,11 @@ function startApp() {
 }
 
 // instantiates an array of user class objects
-function makeUsers(array) {
+function instantiateUsers(array) {
   userData.forEach(function (dataItem) {
     let user = new User(dataItem);
     array.push(user);
+
   });
 }
 
@@ -464,3 +465,6 @@ function makeStepStreakHTML(id, activityInfo, userStorage, method) {
 }
 
 startApp();
+/// Dom Updates Starts Here
+// MEDIA QUERIES Here
+// Move necessary to DOMupdates file
