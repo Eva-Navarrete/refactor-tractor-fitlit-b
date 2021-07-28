@@ -4,6 +4,9 @@ import './css/styles.scss';
 import './images/person walking on path.jpg';
 import './images/The Rock.jpg';
 
+import { promise } from '../src/apiCalls';
+
+console.log(promise)
 /////////// These need to be replaced by APIcalls
 import userData from './data/users';
 import hydrationData from './data/hydration';
@@ -59,12 +62,14 @@ var streakListMinutes = document.getElementById('streakListMinutes');
 //This function instantiates all the repo classes and DOM manipulation
 function startApp() {
   //this function is called at end of scripts file
-  let userList = [];
-  makeUsers(userList);
+  promise.then(data => {
+  // let userList = [];
+   let userList = instantiateUsers(data[0].userData);
+   // console.log(userList);
   let userRepo = new UserRepo(userList);
-  let hydrationRepo = new Hydration(hydrationData);
-  let sleepRepo = new Sleep(sleepData);
-  let activityRepo = new Activity(activityData);
+  let hydrationRepo = new Hydration(data[3].hydrationData);
+  let sleepRepo = new Sleep(data[1].sleepData);
+  let activityRepo = new Activity(data[2].activityData);
   var userNowId = pickUser();
   let userNow = getUserById(userNowId, userRepo);
   let today = makeToday(userRepo, userNowId, hydrationData);
@@ -93,14 +98,16 @@ function startApp() {
     randomHistory,
     userNow
   );
+})
 }
 
 // instantiates an array of user class objects
-function makeUsers(array) {
-  userData.forEach(function (dataItem) {
+function instantiateUsers(array) {
+  const users = array.map(dataItem => {
     let user = new User(dataItem);
-    array.push(user);
+    return user;
   });
+  return users;
 }
 
 // Function that picks user to display
@@ -143,7 +150,9 @@ function makeWinnerID(activityInfo, user, dateString, userStorage) {
 
 function makeToday(userStorage, id, dataSet) {
   var sortedArray = userStorage.makeSortedUserArray(id, dataSet);
+  console.log('this sorted Array',sortedArray);
   return sortedArray[0].date;
+
 }
 
 function makeRandomDate(userStorage, id, dataSet) {
