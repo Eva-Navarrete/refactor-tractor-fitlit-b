@@ -21,7 +21,7 @@ describe('Repository', () => {
     expect(repo.data[0]).to.deep.equal({
       userID: 1,
       date: '2019/06/15',
-      pandasSnuggled: 577,
+      pandasSnuggled: 57,
       minutesWasted: 140,
       coffesDrunk: 6,
     });
