@@ -43,7 +43,7 @@ describe('Repository', () => {
     const testWeek = repo.getWeeklyData(2, '2019/06/23');
 
     expect(testWeek.length).to.equal(7);
-    expect(testWeek[0]).to.deep.equal({
+    expect(testWeek[6]).to.deep.equal({
       userID: 2,
       date: '2019/06/17',
       pandasSnuggled: 35,
