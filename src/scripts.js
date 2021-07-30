@@ -77,12 +77,8 @@ function startApp() {
     activityRepo = new Activity(data[2].activityData);
     currentUserID = randomizeId();
     currentUser = getUserById(currentUserID, userRepo); // user object
-    today = makeToday(hydrationRepo, currentUserID); //>>>refactored!
-    randomHistory = makeRandomDate(
-      userRepo,
-      currentUserID,
-      hydrationRepo.hydrationData
-    );
+    today = makeToday(hydrationRepo, currentUserID);
+    randomHistory = makeRandomDate(hydrationRepo.data);
     winnerNow = makeWinnerID(activityRepo, currentUser, today, userRepo);
     console.log('today', today);
     renderPage();
@@ -114,14 +110,14 @@ function makeWinnerID(activityInfo, user, dateString, userStorage) {
 }
 
 function makeToday(dataSet, id) {
-  //>>>> Refactored
   return dataSet.getMostRecentDate(id);
 }
 
-function makeRandomDate(userStorage, id, dataSet) {
-  // NOT DOM
-  var sortedArray = userStorage.makeSortedUserArray(id, dataSet); // using a method on the userStorage?
-  return sortedArray[Math.floor(Math.random() * sortedArray.length + 1)].date;
+function makeRandomDate(dataSet) {
+  const randomDate =
+    dataSet[Math.floor(Math.random() * dataSet.length + 1)].date;
+
+  return randomDate;
 }
 startApp();
 ///MAKE SLEEP IS AN UNUSED FUNCTION!

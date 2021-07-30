@@ -3,11 +3,10 @@ import Repository from './Repository';
 class Hydration extends Repository {
   constructor(hydrationData) {
     super(hydrationData);
-    this.hydrationData = hydrationData;
   }
 
   calculateDailyOunces(id, date) {
-    let findOuncesByDate = this.hydrationData.find(
+    let findOuncesByDate = this.data.find(
       (data) => id === data.userID && date === data.date
     );
     return findOuncesByDate.numOunces;
