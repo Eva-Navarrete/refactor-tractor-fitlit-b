@@ -39,6 +39,14 @@ describe('Repository', () => {
     });
   });
 
+  it('should be able to return a week of dates', () => {
+    const week = repo.getSevenDates('2019/06/23');
+
+    expect(week.length).to.equal(7);
+    expect(week[0]).to.equal('2019/06/23');
+    expect(week[6]).to.equal('2019/06/17');
+  });
+
   it('should be able to return 7 consecutive objects by date and id', () => {
     const testWeek = repo.getWeeklyData(2, '2019/06/23');
 
@@ -55,12 +63,12 @@ describe('Repository', () => {
   it('should be able to calculate averages', () => {
     const testAvgPandas = repo.getAvg('pandasSnuggled', 1);
 
-    expect(testAvgPandas).to.equal(37); //double check and round
+    expect(testAvgPandas).to.equal(37.3); //double check and round
   });
 
   it('should be able to calculate the average for a different property', () => {
-    const testAllCoffeesAvg = repo.getAvg('coffeesDrunk');
+    const testAllCoffeesAvg = repo.getAvg('coffesDrunk');
 
-    expect(testAllCoffeesAvg).to.equal(3); //double check and round
+    expect(testAllCoffeesAvg).to.equal(2.6); //double check and round
   });
 });
