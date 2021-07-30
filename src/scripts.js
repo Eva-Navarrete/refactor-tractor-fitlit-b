@@ -4,19 +4,15 @@ import './css/styles.scss';
 import './images/person walking on path.jpg';
 import './images/The Rock.jpg';
 
-import {
-  promise
-} from '../src/apiCalls';
-import {
-  renderPage
-} from '../src/domUpdates';
-
+import { promise } from '../src/apiCalls';
+import { renderPage } from '../src/domUpdates';
 
 import User from './User';
 import Activity from './Activity';
 import Hydration from './Hydration';
 import Sleep from './Sleep';
 import UserRepo from './User-repo';
+import Repository from './Repository';
 ////////////
 
 // Which ones are actually necessary?
@@ -72,7 +68,7 @@ export let winnerNow;
 //This function instantiates all the repo classes and DOM manipulation
 function startApp() {
   //this function is called at end of scripts file
-  promise.then(data => {
+  promise.then((data) => {
     // let userList = [];
     userList = instantiateUsers(data[0].userData);
     userRepo = new UserRepo(userList);
@@ -81,17 +77,21 @@ function startApp() {
     activityRepo = new Activity(data[2].activityData);
     currentUserID = randomizeId();
     currentUser = getUserById(currentUserID, userRepo); // user object
-    today = makeToday(userRepo, currentUserID, hydrationRepo.hydrationData);
-    randomHistory = makeRandomDate(userRepo, currentUserID, hydrationRepo.hydrationData);
+    today = makeToday(hydrationRepo, currentUserID); //>>>refactored!
+    randomHistory = makeRandomDate(
+      userRepo,
+      currentUserID,
+      hydrationRepo.hydrationData
+    );
     winnerNow = makeWinnerID(activityRepo, currentUser, today, userRepo);
-
-    renderPage()
-  })
+    console.log('today', today);
+    renderPage();
+  });
 }
 
 // instantiates an array of user class objects
 function instantiateUsers(array) {
-  const users = array.map(dataItem => {
+  const users = array.map((dataItem) => {
     let user = new User(dataItem);
     return user;
   });
@@ -108,16 +108,18 @@ function getUserById(id, listRepo) {
   return listRepo.getDataFromID(id);
 }
 
-function makeWinnerID(activityInfo, user, dateString, userStorage) { // NOT DOM MANI
+function makeWinnerID(activityInfo, user, dateString, userStorage) {
+  // NOT DOM MANI
   return activityInfo.getWinnerId(user, dateString, userStorage);
 }
 
-function makeToday(userStorage, id, dataSet) {
-  var sortedArray = userStorage.makeSortedUserArray(id, dataSet);
-  return sortedArray[0].date;
+function makeToday(dataSet, id) {
+  //>>>> Refactored
+  return dataSet.getMostRecentDate(id);
 }
 
-function makeRandomDate(userStorage, id, dataSet) { // NOT DOM
+function makeRandomDate(userStorage, id, dataSet) {
+  // NOT DOM
   var sortedArray = userStorage.makeSortedUserArray(id, dataSet); // using a method on the userStorage?
   return sortedArray[Math.floor(Math.random() * sortedArray.length + 1)].date;
 }
