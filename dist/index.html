@@ -16,7 +16,15 @@
 
 <body>
   <h1 id="headerText">Activity Tracker</h1>
-  <section class="main"> 
+  <form id ="add-hydration">
+        <input placeholder="date" type = "date" name="date" required />
+        <input type = "number" step = "0.01" placeholder="numOunces"  name="numOunces" required />
+        <!-- <input placeholder="fun fact" name="fun_fact" required /> -->
+        <input type="submit" value="Add Hydration" />
+      </form>
+      <!-- Add a erro message p tag here  -->
+      <p id = "js-error" class="js-error"></p>
+  <section class="main">
     <!-- make into aside main-sidebar-body -->
     <section class="main-sidebar-body">
       <section class="body-sidebar-sidebarContainer">

@@ -10,8 +10,10 @@ const fetchedActivityData = fetch('http://localhost:3001/api/v1/activity')
 .then(response => response.json())
 .catch(err => console.log(err));
 
-const fetchedHydrationData = fetch('http://localhost:3001/api/v1/hydration')
+export const fetchedHydrationData = fetch('http://localhost:3001/api/v1/hydration')
 .then(response => response.json())
+.then( message => {console.log('workriing')
+return message })
 .catch(err => console.log(err));
 
 
@@ -27,7 +29,7 @@ export const postHydration = (hydrationObj) => {
       'Content-Type': 'application/json'
     }
   }).then(response => response.json())
-  .then(json => console.log(json))
-  .catch(err => console.log('NOPE'))
+  .then(json => console.log(json)) // export function from Dom mainuplate and have it run here. Write it inside of domUpdate
+  .catch(err => console.log('NOPE')) // should make an error function
 
 }

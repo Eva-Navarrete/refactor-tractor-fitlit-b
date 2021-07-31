@@ -48,6 +48,9 @@ let bestUserSteps = document.getElementById('bestUserSteps');
 let streakList = document.getElementById('streakList');
 let streakListMinutes = document.getElementById('streakListMinutes');
 
+
+// QUERY SELECTION FOR FORMS:
+
 function renderSidebar(user, userStorage) {
   sidebarName.innerText = user.name;
   headerText.innerText = `${user.getFirstName()}'s Activity Tracker`;
