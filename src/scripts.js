@@ -6,9 +6,9 @@ import dayjs from 'dayjs';
 import './images/person walking on path.jpg';
 import './images/The Rock.jpg';
 
-import { promise, postHydration, fetchedHydrationData } from '../src/apiCalls';
+import { promise, postHydration, fetchedHydrationData, fetchHydro } from '../src/apiCalls';
 
-import { renderPage } from '../src/domUpdates';
+import { renderPage, renderHydration } from '../src/domUpdates';
 
 import User from './User';
 import Activity from './Activity';
@@ -128,9 +128,25 @@ const validateInfo = (obj) => {
     errorMsg.innerText ="Needs valid Date"
     return
   } else {
+    today = obj.date;
     // errorMsg.innerText ="No Error"
-    console.log(obj.numOunces)
+    // console.log(obj.numOunces)
     postHydration(obj)
+    .then((response) => {
+      console.log(response)
+      // return invokeFetch();
+      // return promise;
+      return fetch('http://localhost:3001/api/v1/hydration')
+    })
+    .then(response => response.json())
+    .then(data => {
+      console.log(data)
+      hydrationRepo = new Hydration(data.hydrationData)
+      console.log(hydrationRepo)
+      renderHydration(currentUserID, hydrationRepo, today, userRepo, randomHistory);
+      return hydrationRepo;
+    }).catch(err => console.log(err))
+
   }
 }
 

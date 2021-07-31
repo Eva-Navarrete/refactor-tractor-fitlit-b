@@ -10,6 +10,11 @@ const fetchedActivityData = fetch('http://localhost:3001/api/v1/activity')
 .then(response => response.json())
 .catch(err => console.log(err));
 
+export const fetchHydro = () => {
+  return fetchedHydrationData;
+}
+
+
 export const fetchedHydrationData = fetch('http://localhost:3001/api/v1/hydration')
 .then(response => response.json())
 .then( message => {console.log('workriing')
@@ -22,14 +27,15 @@ return message })
 // POST requests
 //sleep
 export const postHydration = (hydrationObj) => {
-  fetch("http://localhost:3001/api/v1/hydration", {
+  return fetch("http://localhost:3001/api/v1/hydration", {
     method: 'POST',
     body: JSON.stringify(hydrationObj),
     headers: {
       'Content-Type': 'application/json'
     }
-  }).then(response => response.json())
-  .then(json => console.log(json)) // export function from Dom mainuplate and have it run here. Write it inside of domUpdate
-  .catch(err => console.log('NOPE')) // should make an error function
+  })
+  .then(response => response.json())
+  // .then(json => console.log(json)) // export function from Dom mainuplate and have it run here. Write it inside of domUpdate
+  // .catch(err => console.log('NOPE')) // should make an error function
 
 }
