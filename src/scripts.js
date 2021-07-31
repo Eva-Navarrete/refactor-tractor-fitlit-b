@@ -4,7 +4,8 @@ import './css/styles.scss';
 import './images/person walking on path.jpg';
 import './images/The Rock.jpg';
 
-import { promise } from '../src/apiCalls';
+import { promise, postHydration } from '../src/apiCalls';
+
 import { renderPage } from '../src/domUpdates';
 
 import User from './User';
@@ -81,7 +82,7 @@ function startApp() {
     randomHistory = makeRandomDate(hydrationRepo.data);
     winnerNow = makeWinnerID(activityRepo, currentUser, today, userRepo);
     console.log('today', today);
-    renderPage();
+    renderPage()
   });
 }
 
@@ -119,7 +120,11 @@ function makeRandomDate(dataSet) {
 
   return randomDate;
 }
+const water = {"userID":1,"date":"2019/06/15","numOunces":37}
+postHydration(water)
 startApp();
+
+
 ///MAKE SLEEP IS AN UNUSED FUNCTION!
 // function makeSleepQualityHTML(id, sleepInfo, userStorage, method) {
 //   return method
