@@ -1,9 +1,7 @@
 import 'dayjs';
-import Repository from './Repository';
 
-class UserRepo extends Repository {
+class UserRepo {
   constructor(users) {
-    super(users);
     this.users = users;
   }
 

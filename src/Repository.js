@@ -47,8 +47,10 @@ class Repository {
     return Number((total / dataCollection.length).toFixed(1));
   }
 
-  getMostRecentDate() {
-    const days = this.data.map((item) => item.date);
+  getMostRecentDate(id) {
+    const userDays = this.data.filter((item) => item.userID === id);
+
+    const days = userDays.map((item) => item.date);
     const maxDate = days.reduce((mostRecent, current) => {
       if (dayjs(mostRecent).isBefore(dayjs(current))) {
         mostRecent = current;

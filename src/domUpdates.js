@@ -8,7 +8,7 @@ import {
   currentUserID,
   today,
   randomHistory,
-  winnerNow
+  winnerNow,
 } from '../src/scripts';
 // Move necessary to DOMupdates file
 let sidebarName = document.getElementById('sidebarName');
@@ -28,8 +28,12 @@ let sleepQualityToday = document.getElementById('sleepQualityToday');
 let avUserSleepQuality = document.getElementById('avUserSleepQuality');
 let sleepThisWeek = document.getElementById('sleepThisWeek');
 let sleepEarlierWeek = document.getElementById('sleepEarlierWeek');
-let friendChallengeListToday = document.getElementById('friendChallengeListToday');
-let friendChallengeListHistory = document.getElementById('friendChallengeListHistory');
+let friendChallengeListToday = document.getElementById(
+  'friendChallengeListToday'
+);
+let friendChallengeListHistory = document.getElementById(
+  'friendChallengeListHistory'
+);
 let bigWinner = document.getElementById('bigWinner');
 let userStepsToday = document.getElementById('userStepsToday');
 let avgStepsToday = document.getElementById('avgStepsToday');
@@ -58,7 +62,8 @@ function renderSidebar(user, userStorage) {
   );
 }
 
-function renderFriendList(user, userStorage) { // this is rendered inside of renderSidebar
+function renderFriendList(user, userStorage) {
+  // this is rendered inside of renderSidebar
   return user // return is happening prior to the function? No... Return is holding the function
     .getFriendsNames(userStorage)
     .map(
@@ -67,7 +72,8 @@ function renderFriendList(user, userStorage) { // this is rendered inside of ren
     .join('');
 }
 
-function renderSleep(id, sleepInfo, dateString, userStorage, laterDateString) { //
+function renderSleep(id, sleepInfo, dateString, userStorage, laterDateString) {
+  //
   sleepToday.insertAdjacentHTML(
     'afterBegin',
     `<p>You slept</p> <p><span class="number">${sleepInfo.calculateDailySleep(
@@ -112,7 +118,7 @@ function makeSleepHTML(id, sleepInfo, userStorage, method) {
   return method
     .map(
       (sleepData) =>
-      `<li class="historical-list-listItem">On ${sleepData} hours</li>`
+        `<li class="historical-list-listItem">On ${sleepData} hours</li>`
     )
     .join('');
 }
@@ -133,7 +139,9 @@ function renderHydration( // Dom manipulation
   );
   hydrationAverage.insertAdjacentHTML(
     'afterBegin',
-    `<p>Your average water intake is</p><p><span class="number">${hydrationInfo.calculateAverageOunces(
+    `<p>Your average water intake is</p><p><span class="number">${hydrationInfo.getAvg(
+      //>>>>REFACTORED!
+      'numOunces',
       id
     )}</span></p> <p>oz per day.</p>`
   );
@@ -143,7 +151,7 @@ function renderHydration( // Dom manipulation
       id,
       hydrationInfo,
       userStorage,
-      hydrationInfo.calculateFirstWeekOunces(userStorage, id)
+      hydrationInfo.calculateWeekOunces(id, dateString)
     )
   );
   hydrationEarlierWeek.insertAdjacentHTML(
@@ -152,21 +160,30 @@ function renderHydration( // Dom manipulation
       id,
       hydrationInfo,
       userStorage,
-      hydrationInfo.calculateRandomWeekOunces(laterDateString, id, userStorage)
+      hydrationInfo.calculateWeekOunces(id, laterDateString)
     )
   );
 }
 
-function renderHydrationHTML(id, hydrationInfo, userStorage, method) { // dom monipulation
+function renderHydrationHTML(id, hydrationInfo, userStorage, method) {
+  // dom monipulation
   return method
     .map(
       (drinkData) =>
-      `<li class="historical-list-listItem">On ${drinkData}oz</li>`
+        `<li class="historical-list-listItem">On ${drinkData}oz</li>`
     )
     .join('');
 }
 
-function renderActivity(id, activityInfo, dateString, userStorage, laterDateString, user, winnerId) {
+function renderActivity(
+  id,
+  activityInfo,
+  dateString,
+  userStorage,
+  laterDateString,
+  user,
+  winnerId
+) {
   userStairsToday.insertAdjacentHTML(
     'afterBegin',
     `<p>Stair Count:</p><p>You</><p><span class="number">${activityInfo.userDataForToday(
@@ -268,9 +285,11 @@ function renderActivity(id, activityInfo, dateString, userStorage, laterDateStri
 
 function renderStepsHTML(id, activityInfo, userStorage, method) {
   return method
-    .map((activityData) =>
-      `<li class="historical-list-listItem">On ${activityData} steps</li>`
-    ).join('');
+    .map(
+      (activityData) =>
+        `<li class="historical-list-listItem">On ${activityData} steps</li>`
+    )
+    .join('');
 }
 
 function renderStairsHTML(id, activityInfo, userStorage, method) {
@@ -281,7 +300,8 @@ function renderStairsHTML(id, activityInfo, userStorage, method) {
     .join('');
 }
 
-function renderMinutes(id, activityInfo, userStorage, method) { // invoked inside of renderActivity function
+function renderMinutes(id, activityInfo, userStorage, method) {
+  // invoked inside of renderActivity function
   return method
     .map(
       (data) => `<li class="historical-list-listItem">On ${data} minutes</li>`
@@ -293,12 +313,19 @@ function renderFriendHTML(id, activityInfo, userStorage, method) {
   return method
     .map(
       (friendChallengeData) =>
-      `<li class="historical-list-listItem">Your friend ${friendChallengeData} average steps.</li>`
+        `<li class="historical-list-listItem">Your friend ${friendChallengeData} average steps.</li>`
     )
     .join('');
 }
 
-function renderFriendGame(id, activityInfo, userStorage, dateString, laterDateString, user) {
+function renderFriendGame(
+  id,
+  activityInfo,
+  userStorage,
+  dateString,
+  laterDateString,
+  user
+) {
   friendChallengeListToday.insertAdjacentHTML(
     'afterBegin',
     renderFriendHTML(
@@ -339,7 +366,8 @@ function renderFriendGame(id, activityInfo, userStorage, dateString, laterDateSt
   function renderStreakHTML(id, activityInfo, userStorage, method) {
     return method
       .map(
-        (streakData) => `<li class="historical-list-listItem">${streakData}!</li>`
+        (streakData) =>
+          `<li class="historical-list-listItem">${streakData}!</li>`
       )
       .join('');
   }
@@ -358,14 +386,29 @@ const renderHistoricalWeek = () => {
   return historicalWeek.forEach((instance) =>
     instance.insertAdjacentHTML('afterBegin', `Week of ${randomHistory}`)
   );
-}
+};
 
 export const renderPage = () => {
-  renderSidebar(currentUser, userRepo)
+  renderSidebar(currentUser, userRepo);
   renderSleep(currentUserID, sleepRepo, today, userRepo, randomHistory);
   renderHydration(currentUserID, hydrationRepo, today, userRepo, randomHistory);
-  renderActivity(currentUserID, activityRepo, today, userRepo, randomHistory, currentUser, winnerNow);
-  renderFriendGame(currentUserID, activityRepo, userRepo, today, randomHistory, currentUser);
-  renderHistoricalWeek()
-  console.log('connected')
+  renderActivity(
+    currentUserID,
+    activityRepo,
+    today,
+    userRepo,
+    randomHistory,
+    currentUser,
+    winnerNow
+  );
+  renderFriendGame(
+    currentUserID,
+    activityRepo,
+    userRepo,
+    today,
+    randomHistory,
+    currentUser
+  );
+  renderHistoricalWeek();
+  console.log('connected');
 };

@@ -72,8 +72,8 @@ describe('Repository', () => {
     expect(testAllCoffeesAvg).to.equal(2.6); //double check and round
   });
 
-  it('should be able to determine the most recent date', () => {
-    const mostRecent = repo.getMostRecentDate();
+  it('should be able to determine the most recent date for a repository', () => {
+    const mostRecent = repo.getMostRecentDate(1);
 
     expect(mostRecent).to.equal('2019/06/23');
   });
