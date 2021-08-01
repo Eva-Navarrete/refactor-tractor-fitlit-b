@@ -37,5 +37,24 @@ export const postHydration = (hydrationObj) => {
   .then(response => response.json())
   // .then(json => console.log(json)) // export function from Dom mainuplate and have it run here. Write it inside of domUpdate
   // .catch(err => console.log('NOPE')) // should make an error function
-
+}
+export const postSleep = (sleepObj) => {
+  return fetch('http://localhost:3001/api/v1/sleep', {
+    method: 'POST',
+    body: JSON.stringify(sleepObj),
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  })
+  .then(response => response.json())
+}
+export const postActivity = (activityObj) => {
+  return fetch('http://localhost:3001/api/v1/activity', {
+    method: 'POST',
+    body: JSON.stringify(activityObj),
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  })
+  .then(response => response.json())
 }

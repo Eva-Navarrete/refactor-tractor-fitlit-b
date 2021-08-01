@@ -6,9 +6,9 @@ import dayjs from 'dayjs';
 import './images/person walking on path.jpg';
 import './images/The Rock.jpg';
 
-import { promise, postHydration, fetchedHydrationData, fetchHydro } from '../src/apiCalls';
+import { promise, postHydration, postActivity, fetchedHydrationData, fetchHydro, postSleep} from '../src/apiCalls';
 
-import { renderPage, renderHydration } from '../src/domUpdates';
+import { renderPage, renderActivity, renderHydration, renderSleep } from '../src/domUpdates';
 
 import User from './User';
 import Activity from './Activity';
@@ -63,15 +63,6 @@ function invokeFetch(){
     renderPage()
   });
 }
-function reinstantiateHydration() {
-  // fetchedHydrationData.then((data) => {
-  //   console.log(data.hydrationData.length)
-  // hydrationRepo = new Hydration(data.hydrationData);
-  // console.log('reinstation', hydrationRepo)
-  invokeFetch()
-  // renderPage()
-// })
-}
 
 // instantiates an array of user class objects
 function instantiateUsers(array) {
@@ -109,48 +100,97 @@ function makeRandomDate(dataSet) {
 const submitForm = (event) => {
   event.preventDefault();
   const formData = new FormData(event.target)
+
   const newHydration = {
     userID: currentUserID, // will need helped
     date: dayjs(formData.get("date")).format('YYYY/DD/MM'),
     numOunces: formData.get("numOunces")
   };
 
-  validateInfo(newHydration);
-  console.log('inside function', hydrationRepo)
-  // reinstantiateHydration() THIS IS FOR GETTING
-  // renderPage()
-  // postHydration(newHydration);
+  const newSleep = {
+    userID: currentUserID,
+    date: dayjs(formData.get("date")).format('YYYY/DD/MM'),
+    hoursSlept:formData.get("hoursSlept"),
+    sleepQuality: formData.get("sleepQuality")
+  };
+
+  const newActivity = {
+    userID: currentUserID,
+    date: dayjs(formData.get("date")).format('YYYY/DD/MM'),
+    numSteps: formData.get("numSteps"),
+    minutesActive: formData.get("minutesActive"),
+    flightsOfStairs: formData.get("flightsOfStairs")
+  };
+
+  validateHydration(newHydration);
+  validateSleep(newSleep);
+  validateActivity(newActivity);
+
   event.target.reset()
 }
 
-const validateInfo = (obj) => {
+const validateHydration = (obj) => {
   if (obj.date === "Invalid Date"){
-    errorMsg.innerText ="Needs valid Date"
+    console.log('invalid Date')
     return
   } else {
     today = obj.date;
-    // errorMsg.innerText ="No Error"
-    // console.log(obj.numOunces)
+
     postHydration(obj)
     .then((response) => {
       console.log(response)
-      // return invokeFetch();
-      // return promise;
       return fetch('http://localhost:3001/api/v1/hydration')
     })
     .then(response => response.json())
     .then(data => {
-      console.log(data)
       hydrationRepo = new Hydration(data.hydrationData)
-      console.log(hydrationRepo)
       renderHydration(currentUserID, hydrationRepo, today, userRepo, randomHistory);
       return hydrationRepo;
     }).catch(err => console.log(err))
+  }
+};
 
+const validateActivity = (obj) => {
+  if (obj.date === "Invalid Date") {
+    console.log('invalid Date')
+    return;
+  } else {
+    today = obj.date
+    postActivity(obj)
+    .then((response) => {
+      console.log(response);
+      return fetch('http://localhost:3001/api/v1/activity')
+    })
+    .then(response => response.json())
+    .then(data => {
+      activityRepo = new Activity(data.activityData);
+      renderActivity( currentUserID, activityRepo, today, userRepo, randomHistory, currentUser, winnerNow );
+      return activityRepo;
+    }).catch(err => console.log(err))
+  }
+};
+
+const validateSleep = (obj) => {
+  if(obj.date === "Invalid Date") {
+    console.log('invalid Date')
+    return
+  } else {
+    today = obj.date;
+    postSleep(obj)
+    .then((response)=> {
+      console.log(response)
+      return fetch("http://localhost:3001/api/v1/sleep")
+    })
+    .then(response => response.json())
+    .then(data => {
+      sleepRepo = new Sleep(data.sleepData)
+      renderSleep(currentUserID, sleepRepo, today, userRepo, randomHistory);
+
+      return sleepRepo;
+    }).catch(err => console.log(err))
   }
 }
 
 hydrationForm.addEventListener("submit", (event) => {submitForm(event)})
-// const water = {"userID":1,"date":"2019/06/15","numOunces":37}
-// postHydration(water)
+
 startApp();

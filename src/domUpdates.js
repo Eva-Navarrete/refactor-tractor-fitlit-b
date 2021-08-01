@@ -75,7 +75,7 @@ function renderFriendList(user, userStorage) {
     .join('');
 }
 
-function renderSleep(id, sleepInfo, dateString, userStorage, laterDateString) {
+export function renderSleep(id, sleepInfo, dateString, userStorage, laterDateString) {
   //
   sleepToday.insertAdjacentHTML(
     'afterBegin',
@@ -179,7 +179,7 @@ function renderHydrationHTML(id, hydrationInfo, userStorage, method) {
     .join('');
 }
 
-function renderActivity(
+export function renderActivity(
   id,
   activityInfo,
   dateString,
