@@ -48,6 +48,9 @@ let bestUserSteps = document.getElementById('bestUserSteps');
 let streakList = document.getElementById('streakList');
 let streakListMinutes = document.getElementById('streakListMinutes');
 
+
+// QUERY SELECTION FOR FORMS:
+
 function renderSidebar(user, userStorage) {
   sidebarName.innerText = user.name;
   headerText.innerText = `${user.getFirstName()}'s Activity Tracker`;
@@ -123,13 +126,14 @@ function makeSleepHTML(id, sleepInfo, userStorage, method) {
     .join('');
 }
 
-function renderHydration( // Dom manipulation
+export function renderHydration( // Dom manipulation
   id,
   hydrationInfo,
   dateString,
   userStorage,
   laterDateString
 ) {
+  console.log('>>>>>hydration', hydrationInfo, dateString)
   hydrationToday.insertAdjacentHTML(
     'afterBegin',
     `<p>You drank</p><p><span class="number">${hydrationInfo.calculateDailyOunces(
@@ -387,6 +391,7 @@ const renderHistoricalWeek = () => {
     instance.insertAdjacentHTML('afterBegin', `Week of ${randomHistory}`)
   );
 };
+
 
 export const renderPage = () => {
   renderSidebar(currentUser, userRepo);
