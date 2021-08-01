@@ -18,23 +18,23 @@
   <h1 id="headerText">Activity Tracker</h1>
   <section class="main">
     <!-- make into aside main-sidebar-body -->
-    <section class="main-sidebar-body">
-      <section class="body-sidebar-sidebarContainer">
-        <h2 class="sidebar-header-name" id="sidebarName">Name Name</h2>
+    <section class="main-sidebar-body sidebar-left">
+      <section class="body-sidebar-sidebarContainer" "leftSidebarContainer">
+        <h2 class="sidebar-header-name" "user-name" id="userName" >Name Name</h2>
         <!-- <div class="sidebar-header-line"></div> -->
-        <img src="./images/The Rock.jpg" class="sidebar-header-userImage" alt="Imge of the Rock smiling">
+        <img src="./images/The Rock.jpg" class="sidebar-header-userImage user-image" alt="Imge of the Rock smiling">
         <!-- <div class="sidebar-header-line"></div> -->
-        <p class="sidebar-header-userInfo" id="userAddress"></p>
+        <p class="sidebar-header-userInfo user-info" id="userAddress"></p>
         <!-- <div class="sidebar-header-line"></div> -->
-        <p class="sidebar-header-userInfo" id="userEmail"></p>
+        <p class="sidebar-header-userInfo user-info" id="userEmail"></p>
         <!-- <div class="sidebar-header-line"></div> -->
-        <p class="sidebar-header-userInfo" id="userStridelength"></p>
+        <p class="sidebar-header-userInfo user-info" id="userStridelength"></p>
         <!-- <div class="sidebar-header-line"></div> -->
-        <p class="sidebar-header-userInfo" id="stepGoalCard"></p>
-        <p class="sidebar-header-userInfo" id="avStepGoalCard"></p>
+        <p class="sidebar-header-userInfo user-info" id="stepGoalCard"></p>
+        <p class="sidebar-header-userInfo user-info" id="avStepGoalCard"></p>
         <!-- <div class="sidebar-header-line"></div> -->
-        <section class="sidebar-body-friendContainer">
-          <p class="sidebar-header-userInfo">Friends</p>
+        <section class="sidebar-body-friendContainer left-friendContainer">
+          <p class="sidebar-header-userInfo user-info">Friends</p>
           <section class="sidebar-friendContainer-listItems">
             <ul class="card-vertical-list" id="friendList">
               <!-- friend list goes here -->
@@ -49,9 +49,9 @@
       </section>
     </section>
     <!-- Use charts to display -->
-    <section class="body-main-infoContainter">
-      <section class="main-column-hydration">
-        <section class="infoContainer-cardContainer-card-horizontal">
+    <section class="body-main-infoContainter main-infoContainter">
+      <section class="main-column-hydration column-hydration">
+        <section class="infoContainer-cardContainer-card-horizontal info-container">
           <!-- day hydration card -->
           <div class="card-today-hydration">
             <p id="hydrationToday"></p>
@@ -60,7 +60,7 @@
             <p id="hydrationAverage"></p>
           </div>
         </section>
-        <section class="infoContainer-cardContainer-card-vertical">
+        <section class="infoContainer-cardContainer-card-vertical info-container">
           <div class="card-history-hydration">
             <p class="thisWeek">Water intake this week:</p>
             <div class="sidebar-header-line"></div>
@@ -77,9 +77,9 @@
           </div>
         </section>
       </section>
-      <section class="main-column-activity">
-        <section class="infoContainer-cardContainer-card-horizontal">
-          <section class="horizontalCard-activity-container">
+      <section class="main-column-activity column-activity">
+        <section class="infoContainer-cardContainer-card-horizontal info-container">
+          <section class="horizontalCard-activity-container activity-container">
             <div class="card-today-activity">
               <p id="userStepsToday"></p>
             </div>
@@ -87,7 +87,7 @@
               <p id="avgStepsToday"></p>
             </div>
           </section>
-          <section class="horizontalCard-activity-container">
+          <section class="horizontalCard-activity-container activity-container">
             <div class="card-today-activity">
               <p id="userStairsToday"></p>
             </div>
@@ -95,7 +95,7 @@
               <p id="avgStairsToday"></p>
             </div>
           </section>
-          <section class="horizontalCard-activity-container">
+          <section class="horizontalCard-activity-container activity-container">
             <div class="card-today-activity">
               <p id="userMinutesToday"></p>
             </div>
@@ -104,8 +104,8 @@
             </div>
           </section>
         </section>
-        <section class="infoContainer-cardContainer-card-horizontal">
-          <section class="horizontalCard-activity-container">
+        <section class="infoContainer-cardContainer-card-horizontal info-container">
+          <section class="horizontalCard-activity-container activity-container">
             <div class="card-history-activity">
               <p class="thisWeek">Your steps this week</p>
               <div class="sidebar-header-line"></div>
@@ -121,7 +121,7 @@
               </ul>
             </div>
           </section>
-          <section class="horizontalCard-activity-container">
+          <section class="horizontalCard-activity-container activity-container">
             <div class="card-history-activity">
               <p class="thisWeek">Your minutes of activity this week</p>
               <div class="sidebar-header-line"></div>
@@ -140,7 +140,7 @@
         </section>
       </section>
       <section class="main-column-sleep">
-        <section class="infoContainer-cardContainer-card-horizontal">
+        <section class="infoContainer-cardContainer-card-horizontal info-container">
           <div class="card-today-sleep">
             <p id="sleepToday"></p>
           </div>
@@ -151,7 +151,7 @@
             <p id="avUserSleepQuality"></p>
           </div>
         </section>
-        <section class="infoContainer-cardContainer-card-vertical">
+        <section class="infoContainer-cardContainer-card-vertical vertical-infoContainer">
           <div class="card-history-sleep">
             <p class="thisWeek">Hours of sleep this week</p>
             <div class="sidebar-header-line"></div>
@@ -169,9 +169,9 @@
         </section>
       </section>
     </section>
-    <section class="main-sidebar-body">
+    <section class="main-sidebar-body right-sidebar">
       <section class="body-sidebar-sidebarContainer">
-        <h2 class="sidebar-header-name" id="sidebarName">FRIENDLY STEP CHALLENGE!</h2>
+        <h2 class="sidebar-header-name user-name" id="sidebarName userName">FRIENDLY STEP CHALLENGE!</h2>
         <div class="sidebar-header-line"></div>
         <img src="./images/person walking on path.jpg" class="sidebar-header-userImage" alt="image of legs on pavement exercising">
         <div class="sidebar-header-line"></div>
@@ -180,7 +180,7 @@
         <p class="sidebar-header-userInfo" id="stepGoalCard"></p>
         <p class="sidebar-header-userInfo" id="avStepGoalCard">
         </p>
-        <section class="sidebar-body-friendContainer">
+        <section class="sidebar-body-friendContainer right-friendContainer">
           <section class="sidebar-friendContainer-listItems">
             <p class="thisWeek">Rank this week</p>
             <ul class="card-vertical-list" id="friendChallengeListToday">
