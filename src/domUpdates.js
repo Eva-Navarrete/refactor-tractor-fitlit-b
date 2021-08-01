@@ -11,7 +11,7 @@ import {
   winnerNow,
 } from '../src/scripts';
 // Move necessary to DOMupdates file
-let sidebarName = document.getElementById('sidebarName');
+let userName = document.getElementById('userName');
 let stepGoalCard = document.getElementById('stepGoalCard');
 let headerText = document.getElementById('headerText');
 let userAddress = document.getElementById('userAddress');
@@ -52,7 +52,7 @@ let streakListMinutes = document.getElementById('streakListMinutes');
 // QUERY SELECTION FOR FORMS:
 
 function renderSidebar(user, userStorage) {
-  sidebarName.innerText = user.name;
+  userName.innerText = user.name;
   headerText.innerText = `${user.getFirstName()}'s Activity Tracker`;
   stepGoalCard.innerText = `Your daily step goal is ${user.dailyStepGoal}.`;
   avStepGoalCard.innerText = `The average daily step goal is ${userStorage.calculateAverageStepGoal()}`;
