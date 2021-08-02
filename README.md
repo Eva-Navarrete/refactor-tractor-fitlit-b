@@ -73,7 +73,9 @@ GitHub Page Link: <https://github.com/hheyhhay/refactor-tractor-fitlit-b>
 
 ##### Wins
 
-* 
+* Using class inheritance to dry up methods and properties on classes
+*                                                                                                                      
+                                                                                                                      
 
 ##### Challenges
 
@@ -81,7 +83,7 @@ GitHub Page Link: <https://github.com/hheyhhay/refactor-tractor-fitlit-b>
 
 ##### Overall Impressions
 
--   It was a fun project to test our ability to read others code.
+- It was a fun project to test our ability to read others code.
                                                                                                                      
 
 #### Future Features
