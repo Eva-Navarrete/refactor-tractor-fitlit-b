@@ -1,5 +1,4 @@
 import {
-  userList,
   userRepo,
   hydrationRepo,
   activityRepo,
@@ -10,7 +9,8 @@ import {
   randomHistory,
   winnerNow,
 } from '../src/scripts';
-// Move necessary to DOMupdates file
+
+//Query Selectors
 let userName = document.getElementById('userName');
 let stepGoalCard = document.getElementById('stepGoalCard');
 let headerText = document.getElementById('headerText');
@@ -159,7 +159,6 @@ export function renderHydration( // Dom manipulation
 }
 
 function renderHydrationHTML(id, hydrationInfo, userStorage, method) {
-  // dom monipulation
   return method
     .map(
       (drinkData) =>
@@ -212,9 +211,6 @@ export function renderActivity(
   userStepsThisWeek.insertAdjacentHTML(
     'afterBegin',
     renderStepsHTML(
-      id,
-      activityInfo,
-      userStorage,
       activityInfo.userDataForWeek(id, dateString, userStorage, 'numSteps')
     )
   );
@@ -232,18 +228,12 @@ export function renderActivity(
   userMinutesThisWeek.insertAdjacentHTML(
     'afterBegin',
     renderMinutes(
-      id,
-      activityInfo,
-      userStorage,
       activityInfo.userDataForWeek(id, dateString, userStorage, 'minutesActive')
     )
   );
   bestUserSteps.insertAdjacentHTML(
     'afterBegin',
     renderStepsHTML(
-      user,
-      activityInfo,
-      userStorage,
       activityInfo.userDataForWeek(
         winnerId,
         dateString,
@@ -254,7 +244,7 @@ export function renderActivity(
   );
 }
 
-function renderStepsHTML(id, activityInfo, userStorage, method) {
+function renderStepsHTML(method) {
   return method
     .map(
       (activityData) =>
@@ -271,8 +261,7 @@ function renderStairsHTML(method) {
     .join('');
 }
 
-function renderMinutes(id, activityInfo, userStorage, method) {
-  // invoked inside of renderActivity function
+function renderMinutes(method) {
   return method
     .map(
       (data) => `<li class="historical-list-listItem">On ${data} minutes</li>`
@@ -289,14 +278,7 @@ function renderFriendHTML(id, activityInfo, userStorage, method) {
     .join('');
 }
 
-function renderFriendGame(
-  id,
-  activityInfo,
-  userStorage,
-  dateString,
-  laterDateString,
-  user
-) {
+function renderFriendGame(id, activityInfo, userStorage, dateString, user) {
   friendChallengeListToday.insertAdjacentHTML(
     'afterBegin',
     renderFriendHTML(
@@ -308,21 +290,11 @@ function renderFriendGame(
   );
   streakList.insertAdjacentHTML(
     'afterBegin',
-    renderStreakHTML(
-      id,
-      activityInfo,
-      userStorage,
-      activityInfo.getStreak(userStorage, id, 'numSteps')
-    )
+    renderStreakHTML(activityInfo.getStreak(userStorage, id, 'numSteps'))
   );
   streakListMinutes.insertAdjacentHTML(
     'afterBegin',
-    renderStreakHTML(
-      id,
-      activityInfo,
-      userStorage,
-      activityInfo.getStreak(userStorage, id, 'minutesActive')
-    )
+    renderStreakHTML(activityInfo.getStreak(userStorage, id, 'minutesActive'))
   );
   friendChallengeListHistory.insertAdjacentHTML(
     'afterBegin',
@@ -334,7 +306,7 @@ function renderFriendGame(
     )
   );
 
-  function renderStreakHTML(id, activityInfo, userStorage, method) {
+  function renderStreakHTML(method) {
     return method
       .map(
         (streakData) =>
@@ -371,14 +343,7 @@ export const renderPage = () => {
     currentUser,
     winnerNow
   );
-  renderFriendGame(
-    currentUserID,
-    activityRepo,
-    userRepo,
-    today,
-    randomHistory,
-    currentUser
-  );
+  renderFriendGame(currentUserID, activityRepo, userRepo, today, currentUser);
   renderHistoricalWeek();
   console.log('connected');
 };
