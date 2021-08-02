@@ -86,9 +86,12 @@ GitHub Page Link: <https://github.com/hheyhhay/refactor-tractor-fitlit-b>
 
 #### Future Features
 
-* Sass Styling 
-                                                                                                                     * Adding Charts 
-                                                                                                                     * Add login 
+* Sass Styling
+* Adding Charts. 
+* Add User Login                                                                                                                   
+                                                                                                                    
+                                                                                                                     
+                                                                                                                   
 
 ## Credits
 
