@@ -74,12 +74,14 @@ GitHub Page Link: <https://github.com/hheyhhay/refactor-tractor-fitlit-b>
 ##### Wins
 
 * Using class inheritance to dry up methods and properties on classes
-*                                                                                                                      
+* Successfully implemented POST on the site and have the updated data set update the DOM
+* Effectively store the dom updates into a domUpdate file
+* Achieve 100 on LightHouse access rating                                                                                                                  
                                                                                                                       
 
 ##### Challenges
 
-* 
+* Working inside of someone’s poorly written code and balancing between the desire to completely redo the project and the push to hit our learning goals 
 
 ##### Overall Impressions
 
