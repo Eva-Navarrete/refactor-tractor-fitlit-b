@@ -39,7 +39,7 @@ To solidify and demonstrate the understanding of:
 
 ## Features
 
--   A website that allows users to keep track of their activity, hydration, and sleep data. With a fun flip card feature that shows more information on hover. This way we can display more information overall without overloading the user with too much information at once.
+-   A website that allows users to keep track of their activity, hydration, and sleep data. Also allwoing users to post their own data based on date.
 
 **[Back to top](#table-of-contents)**
 
@@ -73,19 +73,22 @@ GitHub Page Link: <https://github.com/hheyhhay/refactor-tractor-fitlit-b>
 
 ##### Wins
 
-*
+* 
 
 ##### Challenges
 
-*
+* 
 
 ##### Overall Impressions
 
--   It was a fun project to test our creativity!
+-   It was a fun project to test our ability to read others code.
+                                                                                                                     
 
 #### Future Features
 
-*
+* Sass Styling 
+                                                                                                                     * Adding Charts 
+                                                                                                                     * Add login 
 
 ## Credits
 
