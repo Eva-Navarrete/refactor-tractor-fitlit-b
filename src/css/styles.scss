@@ -26,7 +26,6 @@ h1 {
   height: 1500px;
 }
 
-// .main-sidebar-body
 .sidebar-left .right-sidebar{
   display: flex;
   flex-direction: row;
@@ -34,7 +33,6 @@ h1 {
   height: 100%;
 }
 
-// .body-sidebar-sidebarContainer
  .leftSidebarContainer{
   background-color: #2F4F4F;
   // background-color: #9a9dab;
@@ -46,11 +44,9 @@ h1 {
   overflow: scroll;
 }
 
-// .sidebar-header-name
  .user-name {
   text-align: center;
 }
-// .sidebar-header-userInfo
 
  .user-info {
   font-family: sans-serif;
@@ -68,7 +64,6 @@ h1 {
   width: 80%;
 }
 
-// .user-image
 .sidebar-header-userImage {
   border-radius: 50%;
   border-color: black;
@@ -80,18 +75,15 @@ h1 {
   justify-content: center;
 }
 
-// .left-friendContainer ⌄.right-friendContainer
-.sidebar-body-friendContainer {
+.left-friendContainer, .right-friendContainer {
   display: flex;
   flex-direction: column;
 }
 
-// .sidebar-friendContainer
-.sidebar-friendContainer-listItems {
+.sidebar-friendContainer {
   text-align: left;
 }
 
-// .main-infoContainter
 .body-main-infoContainter {
   width: 100%;
   border: 1px solid black;
@@ -101,8 +93,7 @@ h1 {
   overflow: scroll;
 }
 
-// .column-hydration
-.main-column-hydration {
+.column-hydration {
   display: flex;
   flex-direction: row;
   height: 25%;
@@ -120,7 +111,6 @@ h1 {
   height: 35%;
 }
 
-// .info-container
 .infoContainer-cardContainer-card-horizontal {
   width: 100%;
   background-color: white;
@@ -132,8 +122,7 @@ h1 {
   justify-content: space-between;
 }
 
-// .activity-container
-.horizontalCard-activity-container {
+.activity-container{
   display: flex;
   flex-direction: row;
   justify-content: space-around;
@@ -141,7 +130,6 @@ h1 {
   overflow: scroll;
 }
 
-// .vertical-infoContainer
 .infoContainer-cardContainer-card-vertical {
   width: 100%;
   background-color: white;

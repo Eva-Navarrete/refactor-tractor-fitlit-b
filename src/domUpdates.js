@@ -77,26 +77,25 @@ function renderFriendList(user, userStorage) {
 
 export function renderSleep(id, sleepInfo, dateString, userStorage, laterDateString) {
   //
-  sleepToday.insertAdjacentHTML(
-    'afterBegin',
+  sleepToday.innerHTML =
+
     `<p>You slept</p> <p><span class="number">${sleepInfo.calculateDailySleep(
       id,
       dateString
     )}</span></p> <p>hours today.</p>`
-  );
-  sleepQualityToday.insertAdjacentHTML(
-    'afterBegin',
+  ;
+  sleepQualityToday.innerHTML =
+
     `<p>Your sleep quality was</p> <p><span class="number">${sleepInfo.calculateDailySleepQuality(
       id,
       dateString
     )}</span></p><p>out of 5.</p>`
-  );
-  avUserSleepQuality.insertAdjacentHTML(
-    'afterBegin',
+  ;
+  avUserSleepQuality.innerHTML =
     `<p>The average user's sleep quality is</p> <p><span class="number">${
       Math.round(sleepInfo.calculateAllUserSleepQuality() * 100) / 100
     }</span></p><p>out of 5.</p>`
-  );
+  ;
   sleepThisWeek.insertAdjacentHTML(
     'afterBegin',
     makeSleepHTML(
@@ -134,13 +133,12 @@ export function renderHydration( // Dom manipulation
   laterDateString
 ) {
   console.log('>>>>>hydration', hydrationInfo, dateString)
-  hydrationToday.insertAdjacentHTML(
-    'afterBegin',
+  hydrationToday.innerHTML =
     `<p>You drank</p><p><span class="number">${hydrationInfo.calculateDailyOunces(
       id,
       dateString
     )}</span></p><p>oz water today.</p>`
-  );
+  ;
   hydrationAverage.insertAdjacentHTML(
     'afterBegin',
     `<p>Your average water intake is</p><p><span class="number">${hydrationInfo.getAvg(
@@ -197,40 +195,38 @@ export function renderActivity(
       'flightsOfStairs'
     )}</span></p>`
   );
-  avgStairsToday.insertAdjacentHTML(
-    'afterBegin',
+  avgStairsToday.innerHTML =
+
     `<p>Stair Count: </p><p>All Users</p><p><span class="number">${activityInfo.getAllUserAverageForDay(
       dateString,
       userStorage,
       'flightsOfStairs'
     )}</span></p>`
-  );
-  userStepsToday.insertAdjacentHTML(
-    'afterBegin',
+  ;
+  userStepsToday.innerHTML =
     `<p>Step Count:</p><p>You</p><p><span class="number">${activityInfo.userDataForToday(
       id,
       dateString,
       userStorage,
       'numSteps'
     )}</span></p>`
-  );
-  avgStepsToday.insertAdjacentHTML(
-    'afterBegin',
+  ;
+  avgStepsToday.innerHTML =
+
     `<p>Step Count:</p><p>All Users</p><p><span class="number">${activityInfo.getAllUserAverageForDay(
       dateString,
       userStorage,
       'numSteps'
     )}</span></p>`
-  );
-  userMinutesToday.insertAdjacentHTML(
-    'afterBegin',
+  ;
+  userMinutesToday.innerHTML =
     `<p>Active Minutes:</p><p>You</p><p><span class="number">${activityInfo.userDataForToday(
       id,
       dateString,
       userStorage,
       'minutesActive'
     )}</span></p>`
-  );
+  ;
   avgMinutesToday.insertAdjacentHTML(
     'afterBegin',
     `<p>Active Minutes:</p><p>All Users</p><p><span class="number">${activityInfo.getAllUserAverageForDay(
