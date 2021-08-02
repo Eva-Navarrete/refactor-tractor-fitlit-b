@@ -1,19 +1,138 @@
-# Refactor Tractor (Fitlit Version B)
+# Refactor Tractor FitLit Starter Kit
 
-## Setup
+### Table of Contents
 
-1. Within your group, decide on one person to have the project repository (repo) on their GitHub account. Then, that person should fork this repo - on the top right corner of this page, click the **Fork** button.
-1. Both memebers of the group should clone down the _forked_ repo. Since you don't want to name your project "refactor-tractor-fitlit-b", you can use an optional argument when you run git clone (you replace the [...] with the terminal command arguments): `git clone [remote-address] [what you want to name the repo]`
-1. Once you have cloned the repo, change into the directory and install the project dependencies. Run `npm install` to install project dependencies.
-1. Run `npm start` in the terminal to see the HTML page (you should see some boilerplate HTML displayed on the page) when you navigate to `http://localhost:8080/`
-1. Make sure both members of your team are collaborators on the forked repo.
+-   [Instructions](#instructions)
+-   [Overview](#overview-and-project-goals)
+-   [Features](#features)
+-   [How does this work?](#how-does-this-work)
+-   [Project Reflection](#project-reflection)
+-   [How To Contribute](#want-to-contribute)
+-   [Instructions for Project Setup](#Instructions-for-project-setup)
+-   [Authors and Contributors](#credits)
 
-## Testing
+The details of the original project are outline in [project spec](http://frontend.turing.io/projects/fitlit.html). The details to refactor project details are outlined in [Refactor tractor](https://frontend.turing.edu/projects/module-2/refactor-tractor-choice.html).
 
-Testing is set up, but you will need to add more tests to it throughout your work flow. If you run `npm install`, you should see tests run. 
+## Instructions
 
-## Linting Your Code
+1.  To run this project we will need to clone this repository and the fitlit-api repository from [this](https://github.com/turingschool-examples/fitlit-api) link.
+2.  From the terminal, `cd` into the fitlit-api repository.
+3.  Run `npm install`
+4.  Run `npm start`
+5.  `cd` into the fitlit repository.
+6.  Run `npm install`
+7.  Run `npm start`
+8.  Visit <http://localhost:8080/>. The project is now running.
 
-Run the command in your terminal `npm run lint` to run the linter on your JavaScript code. There will be errors and warnings right from the start in this starter kit, but that's ok - the linter is still running successfully.
+## Overview and Project Goals
 
-Your linter will look only at the JavaScript files you have within the `src` and the `test` directories.
+The [goal](https://frontend.turing.edu/projects/module-2/refactor-tractor-choice.html) of this group project that was made for Mod1 at [Turing School of Software and Design](https://turing.io/) is to build a fitness tracking app from scratch using HTML, CSS, and Vanilla Javascript.
+
+## Why was this project created?
+
+To solidify and demonstrate the understanding of:
+1\. Writing clean and DRY HTML, CSS, and JS
+2\. Learn fetch calls and how client-server interactions work
+3\. Learn POST request
+4\. Learn to read others code and try to refactor
+
+## Features
+
+-   A website that allows users to keep track of their activity, hydration, and sleep data. With a fun flip card feature that shows more information on hover. This way we can display more information overall without overloading the user with too much information at once.
+
+**[Back to top](#table-of-contents)**
+
+## How does this work?
+
+![FitLit Gif](<>)
+
+GitHub Page Link: <https://github.com/hheyhhay/refactor-tractor-fitlit-b>
+
+**[Back to top](#table-of-contents)**
+
+## Want to contribute?
+
+## Instructions for Project Setup
+
+1.  Clone this [repository.](https://github.com/hheyhhay/refactor-tractor-fitlit-b)
+2.  `cd` into the repository in your terminal.
+3.  Then `npm start` in your terminal to view it on your browser.
+
+## Technologies Used
+
+<p align="left">
+  <img src="https://img.shields.io/badge/javascript%20-%23323330.svg?&style=for-the-badge&logo=javascript&logoColor=%23F7DF1E" alt="javascript" />
+  <img src="https://img.shields.io/badge/html5%20-%23E34F26.svg?&style=for-the-badge&logo=html5&logoColor=white" alt="html5"/>
+  <img src="https://img.shields.io/badge/css3%20-%231572B6.svg?&style=for-the-badge&logo=css3&logoColor=white" alt="CSS3"/>
+  <img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white" alt="Github" />
+  <img src="https://dyclassroom.com/image/topic/mochajs-chaijs/logo.png" height"80px" width="90px"alt=" "Mocha & Chai"/>
+</p>
+
+## Project Reflection
+
+##### Wins
+
+*
+
+##### Challenges
+
+*
+
+##### Overall Impressions
+
+-   It was a fun project to test our creativity!
+
+#### Future Features
+
+*
+
+## Credits
+
+#### Authors
+
+<table>
+    <tr>
+          <td>Hayley D <a href="https://github.com/hheyhhay">GH</td>
+    </tr>
+    </tr>
+ <td><img src="https://avatars.githubusercontent.com/u/78764587?v=4" alt="Hayley GH img"
+width="150" height="auto" /></td>
+     <tr>
+          <td> Eva Navarrete <a href="https://github.com/Eva-Navarrete">GH</td>
+      </tr>
+      </tr>
+<td><img src="https://avatars.githubusercontent.com/u/68021391?v=4" alt="Eva GH img"
+width="150" height="auto" /></td>
+    </tr>
+    <tr>
+         <td> Rachel Jensen <a href="https://github.com/rachelJensen">GH</td>
+     </tr>
+     </tr>
+<td><img src="https://avatars.githubusercontent.com/u/81662051?v=4" alt="Rachel GH img"
+width="150" height="auto" /></td>
+   </tr>
+</table>
+
+#### Reviewers
+
+-   None
+
+#### Project Manager
+
+<table>
+    <tr>
+         <td> Cassandra Torske <a href="https://github.com/CassandraGoose">GH</td>
+    </tr>
+    </tr>
+    <td><img src="https://avatars.githubusercontent.com/u/21070575?v=4" alt="Heather GH img"
+ width="150" height="auto" /></td>
+</tr>
+</table>
+
+* * *
+
+###### This project was created for [Turing School of Software and Design](https://turing.io/)
+
+###### 2021/08/02
+
+**[Back to top](#table-of-contents)**
