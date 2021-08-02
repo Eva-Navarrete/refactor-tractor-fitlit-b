@@ -32,7 +32,6 @@ export const promise = Promise.all([
 ]);
 
 // POST requests
-//sleep
 export const postHydration = (hydrationObj) => {
   return fetch('http://localhost:3001/api/v1/hydration', {
     method: 'POST',
@@ -41,9 +40,8 @@ export const postHydration = (hydrationObj) => {
       'Content-Type': 'application/json',
     },
   }).then((response) => response.json());
-  // .then(json => console.log(json)) // export function from Dom mainuplate and have it run here. Write it inside of domUpdate
-  // .catch(err => console.log('NOPE')) // should make an error function
 };
+
 export const postSleep = (sleepObj) => {
   return fetch('http://localhost:3001/api/v1/sleep', {
     method: 'POST',
@@ -53,6 +51,7 @@ export const postSleep = (sleepObj) => {
     },
   }).then((response) => response.json());
 };
+
 export const postActivity = (activityObj) => {
   return fetch('http://localhost:3001/api/v1/activity', {
     method: 'POST',

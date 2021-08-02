@@ -10,8 +10,6 @@ import {
   promise,
   postHydration,
   postActivity,
-  // fetchedHydrationData,
-  // fetchHydro,
   postSleep,
 } from '../src/apiCalls';
 
@@ -43,7 +41,7 @@ export let today;
 export let randomHistory;
 export let winnerNow;
 
-//This function instantiates all the repo classes and DOM manipulation
+//Functions
 function startApp() {
   currentUserID = randomizeId();
   invokeFetch();
@@ -56,8 +54,7 @@ function invokeFetch() {
     hydrationRepo = new Hydration(data[3].hydrationData);
     sleepRepo = new Sleep(data[1].sleepData);
     activityRepo = new Activity(data[2].activityData);
-
-    currentUser = getUserById(currentUserID, userRepo); // user object
+    currentUser = getUserById(currentUserID, userRepo);
     today = makeToday(hydrationRepo, currentUserID);
     randomHistory = makeRandomDate(hydrationRepo.data);
     winnerNow = makeWinnerID(activityRepo, currentUser, today, userRepo);
@@ -71,7 +68,6 @@ function invokeFetch() {
   });
 }
 
-// instantiates an array of user class objects
 function instantiateUsers(array) {
   const users = array.map((dataItem) => {
     let user = new User(dataItem);
