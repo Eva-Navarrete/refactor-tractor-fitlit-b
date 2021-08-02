@@ -6,19 +6,26 @@ import dayjs from 'dayjs';
 import './images/person walking on path.jpg';
 import './images/The Rock.jpg';
 
-import { promise, postHydration, postActivity, fetchedHydrationData, fetchHydro, postSleep} from '../src/apiCalls';
+import {
+  promise,
+  postHydration,
+  postActivity,
+  postSleep,
+} from '../src/apiCalls';
 
-import { renderPage, renderActivity, renderHydration, renderSleep } from '../src/domUpdates';
+import {
+  renderPage,
+  renderActivity,
+  renderHydration,
+  renderSleep,
+} from '../src/domUpdates';
 
 import User from './User';
 import Activity from './Activity';
 import Hydration from './Hydration';
 import Sleep from './Sleep';
 import UserRepo from './User-repo';
-import Repository from './Repository';
 let hydrationForm = document.getElementById('add-hydration');
-let errorMsg = document.getElementById('js-error');
-
 
 ////////////
 
@@ -34,37 +41,33 @@ export let today;
 export let randomHistory;
 export let winnerNow;
 
-
-//This function instantiates all the repo classes and DOM manipulation
+//Functions
 function startApp() {
-  currentUserID = randomizeId()
+  currentUserID = randomizeId();
   invokeFetch();
 }
 
-
-function invokeFetch(){
+function invokeFetch() {
   promise.then((data) => {
-
-
     userList = instantiateUsers(data[0].userData);
     userRepo = new UserRepo(userList);
     hydrationRepo = new Hydration(data[3].hydrationData);
     sleepRepo = new Sleep(data[1].sleepData);
     activityRepo = new Activity(data[2].activityData);
-
-    currentUser = getUserById(currentUserID, userRepo); // user object
+    currentUser = getUserById(currentUserID, userRepo);
     today = makeToday(hydrationRepo, currentUserID);
     randomHistory = makeRandomDate(hydrationRepo.data);
     winnerNow = makeWinnerID(activityRepo, currentUser, today, userRepo);
     currentUserID;
 
-    hydrationForm.addEventListener("submit", (event) => {submitForm(event)})
+    hydrationForm.addEventListener('submit', (event) => {
+      submitForm(event);
+    });
 
-    renderPage()
+    renderPage();
   });
 }
 
-// instantiates an array of user class objects
 function instantiateUsers(array) {
   const users = array.map((dataItem) => {
     let user = new User(dataItem);
@@ -99,98 +102,116 @@ function makeRandomDate(dataSet) {
 
 const submitForm = (event) => {
   event.preventDefault();
-  const formData = new FormData(event.target)
+  event.stopImmediatePropagation();
+  const formData = new FormData(event.target);
+  console.log('date in form', formData.get('date'));
 
   const newHydration = {
     userID: currentUserID, // will need helped
-    date: dayjs(formData.get("date")).format('YYYY/DD/MM'),
-    numOunces: formData.get("numOunces")
+    date: dayjs(formData.get('date')).format('YYYY/MM/DD'),
+    numOunces: formData.get('numOunces'),
   };
 
   const newSleep = {
     userID: currentUserID,
-    date: dayjs(formData.get("date")).format('YYYY/DD/MM'),
-    hoursSlept:formData.get("hoursSlept"),
-    sleepQuality: formData.get("sleepQuality")
+    date: dayjs(formData.get('date')).format('YYYY/MM/DD'),
+    hoursSlept: formData.get('hoursSlept'),
+    sleepQuality: formData.get('sleepQuality'),
   };
 
   const newActivity = {
     userID: currentUserID,
-    date: dayjs(formData.get("date")).format('YYYY/DD/MM'),
-    numSteps: formData.get("numSteps"),
-    minutesActive: formData.get("minutesActive"),
-    flightsOfStairs: formData.get("flightsOfStairs")
+    date: dayjs(formData.get('date')).format('YYYY/MM/DD'),
+    numSteps: formData.get('numSteps'),
+    minutesActive: formData.get('minutesActive'),
+    flightsOfStairs: formData.get('flightsOfStairs'),
   };
 
   validateHydration(newHydration);
   validateSleep(newSleep);
   validateActivity(newActivity);
-
-  event.target.reset()
-}
+};
 
 const validateHydration = (obj) => {
-  if (obj.date === "Invalid Date"){
-    console.log('invalid Date')
-    return
+  if (obj.date === 'Invalid Date') {
+    return;
   } else {
     today = obj.date;
 
     postHydration(obj)
-    .then((response) => {
-      console.log(response)
-      return fetch('http://localhost:3001/api/v1/hydration')
-    })
-    .then(response => response.json())
-    .then(data => {
-      hydrationRepo = new Hydration(data.hydrationData)
-      renderHydration(currentUserID, hydrationRepo, today, userRepo, randomHistory);
-      return hydrationRepo;
-    }).catch(err => console.log(err))
+      .then((response) => {
+        console.log(response);
+        return fetch('http://localhost:3001/api/v1/hydration');
+      })
+      .then((response) => response.json())
+      .then((data) => {
+        hydrationRepo = new Hydration(data.hydrationData);
+        renderHydration(
+          currentUserID,
+          hydrationRepo,
+          today,
+          userRepo,
+          randomHistory
+        );
+        return hydrationRepo;
+      })
+      .catch((err) => console.log(err));
   }
 };
 
 const validateActivity = (obj) => {
-  if (obj.date === "Invalid Date") {
-    console.log('invalid Date')
+  if (obj.date === 'Invalid Date') {
+    console.log('invalid Date');
     return;
   } else {
-    today = obj.date
+    today = obj.date;
     postActivity(obj)
-    .then((response) => {
-      console.log(response);
-      return fetch('http://localhost:3001/api/v1/activity')
-    })
-    .then(response => response.json())
-    .then(data => {
-      activityRepo = new Activity(data.activityData);
-      renderActivity( currentUserID, activityRepo, today, userRepo, randomHistory, currentUser, winnerNow );
-      return activityRepo;
-    }).catch(err => console.log(err))
+      .then((response) => {
+        console.log(response);
+        return fetch('http://localhost:3001/api/v1/activity');
+      })
+      .then((response) => response.json())
+      .then((data) => {
+        activityRepo = new Activity(data.activityData);
+        renderActivity(
+          currentUserID,
+          activityRepo,
+          today,
+          userRepo,
+          randomHistory,
+          currentUser,
+          winnerNow
+        );
+        return activityRepo;
+      })
+      .catch((err) => console.log(err));
   }
 };
 
 const validateSleep = (obj) => {
-  if(obj.date === "Invalid Date") {
-    console.log('invalid Date')
-    return
+  if (obj.date === 'Invalid Date') {
+    console.log('invalid Date');
+    return;
   } else {
     today = obj.date;
     postSleep(obj)
-    .then((response)=> {
-      console.log(response)
-      return fetch("http://localhost:3001/api/v1/sleep")
-    })
-    .then(response => response.json())
-    .then(data => {
-      sleepRepo = new Sleep(data.sleepData)
-      renderSleep(currentUserID, sleepRepo, today, userRepo, randomHistory);
+      .then((response) => {
+        console.log(response);
+        return fetch('http://localhost:3001/api/v1/sleep');
+      })
+      .then((response) => response.json())
+      .then((data) => {
+        sleepRepo = new Sleep(data.sleepData);
+        renderSleep(currentUserID, sleepRepo, today, userRepo, randomHistory);
 
-      return sleepRepo;
-    }).catch(err => console.log(err))
+        return sleepRepo;
+      })
+      .catch((err) => console.log(err));
   }
-}
+};
 
-hydrationForm.addEventListener("submit", (event) => {submitForm(event)})
+hydrationForm.addEventListener('submit', (event) => {
+  submitForm(event);
+});
 
 startApp();
