@@ -26,7 +26,7 @@ The details of the original project are outline in [project spec](http://fronten
 
 ## Overview and Project Goals
 
-The [goal](https://frontend.turing.edu/projects/module-2/refactor-tractor-choice.html) of this group project that was made for Mod1 at [Turing School of Software and Design](https://turing.io/) is to build a fitness tracking app from scratch using HTML, CSS, and Vanilla Javascript.
+The [goal](https://frontend.turing.edu/projects/module-2/refactor-tractor-choice.html) of this group project that was made for Mod2 at [Turing School of Software and Design](https://turing.io/) is to refactor the code and improve an application. 
 
 ## Why was this project created?
 
@@ -35,6 +35,7 @@ To solidify and demonstrate the understanding of:
 2\. Learn fetch calls and how client-server interactions work
 3\. Learn POST request
 4\. Learn to read others code and try to refactor
+5\. Improve the HTML and CSS to be accessible 
 
 ## Features
 
