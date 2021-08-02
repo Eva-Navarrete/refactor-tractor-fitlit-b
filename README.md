@@ -45,7 +45,6 @@ To solidify and demonstrate the understanding of:
 
 ## How does this work?
 
-![FitLit Gif](<>)
 
 GitHub Page Link: <https://github.com/hheyhhay/refactor-tractor-fitlit-b>
 
